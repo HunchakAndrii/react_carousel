@@ -1,1 +1,55 @@
 // style go here
+li,
+ul {
+  list-style: none;
+}
+
+.Carousel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.Carousel__list {
+  display: flex;
+  overflow: hidden;
+  margin: 0 auto;
+  border: 1px solid black;
+  padding: 0;
+
+  & img {
+    display: block;
+  }
+}
+
+.prev,
+.next {
+  padding: 5px 15px;
+  border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 2px;
+  }
+
+  &:focus,
+  :active {
+    color: lightgoldenrodyellow;
+  }
+}
+
+.next {
+  background-color: darkkhaki;
+}
+
+.prev {
+  margin-right: 5px;
+  background-color: coral;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,26 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Carousel.scss';
 
-const Carousel: React.FC = () => (
-  <div className="Carousel">
-    <ul className="Carousel__list">
-      <li>
-        <img src="./img/1.png" alt="1" />
-      </li>
-      <li>
-        <img src="./img/1.png" alt="2" />
-      </li>
-      <li>
-        <img src="./img/1.png" alt="3" />
-      </li>
-      <li>
-        <img src="./img/1.png" alt="4" />
-      </li>
-    </ul>
+interface CarouselProps {
+  images: string[];
+  step: number;
+  frameSize: number;
+  itemWidth: number;
+  animationDuration: number;
+  infinite: boolean;
+}
 
-    <button type="button">Prev</button>
-    <button type="button">Next</button>
-  </div>
-);
+const Carousel: React.FC<CarouselProps> = ({
+  images,
+  step,
+  frameSize,
+  itemWidth,
+  animationDuration,
+  // infinite,
+}) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const moveNext = () => {
+    if (!Number.isInteger(images.length / frameSize)) {
+      if (currentIndex < images.length / frameSize - 2) {
+
+      }
+    }
+
+    if (currentIndex < images.length / frameSize - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const movePrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+
+  return (
+    <div className="Carousel">
+      <ul
+        className="Carousel__list"
+        style={{ width: `${frameSize * itemWidth}px` }}
+      >
+        {images.map((image, i) => (
+          <li
+            key={image}
+            style={{
+              transform: `translateX(-${currentIndex * (step * 100)}%)`,
+              width: `${itemWidth}px`,
+              transition: `transform ${animationDuration}ms cubic-bezier(0.25, 0.1, 0.25, 1)`,
+            }}
+          >
+            <img src={image} alt={`${i + 1}`} />
+          </li>
+        ))}
+      </ul>
+
+      <div className="btns">
+        <button className="prev" onClick={movePrev}>
+          Prev
+        </button>
+
+        <button className="next" onClick={moveNext}>
+          Next
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default Carousel;
